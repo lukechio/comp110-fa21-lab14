@@ -59,7 +59,7 @@ class Critter:
 
 
 """
-To Do: Complete the ScaredCat and Sloth classes below.
+To Do: Complete the Sloth and ScaredCat classes below.
 
 Note: remove the "pass" statement after you start implementing the constructor.
 """
