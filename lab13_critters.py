@@ -59,17 +59,10 @@ class Critter:
 
 
 """
-To Do: Complete the Cow, Sloth, Cow, and ScaredCat classes below.
+To Do: Complete the Sloth, Cow, and ScaredCat classes below.
 
 Note: remove the "pass" statement after you start implementing the constructor.
 """
-
-class Bear(Critter):
-    """ Replace this with a docstring for your class. """
-
-    def __init__(self, location, is_grizzly):
-        pass
-
 
 class Sloth(Critter):
     """ Replace this with a docstring for your class. """
@@ -147,7 +140,6 @@ stop_button = None
 tick_button = None
 reset_button = None
 
-bear_stats_string = None
 sloth_stats_string = None
 cow_stats_string = None
 torero_stats_string = None
@@ -185,13 +177,13 @@ class World:
         self.amount_eaten = {} # map critter to how much they have eaten
 
         # map from critter type to amount that are alive
-        self.num_alive = {"Bear": 0, "Cow": 0, "Sloth": 0, "ScaredCat": 0}
+        self.num_alive = {"Cow": 0, "Sloth": 0, "ScaredCat": 0}
 
         # map from critter type to amount they've eaten
-        self.num_eaten = {"Bear": 0, "Cow": 0, "Sloth": 0, "ScaredCat": 0}
+        self.num_eaten = {"Cow": 0, "Sloth": 0, "ScaredCat": 0}
 
         # map from critter type to amount of fights won
-        self.num_wins = {"Bear": 0, "Cow": 0, "Sloth": 0, "ScaredCat": 0}
+        self.num_wins = {"Cow": 0, "Sloth": 0, "ScaredCat": 0}
 
         # start with no critters and every spot in the world is open
         self.critters = []
@@ -231,7 +223,7 @@ class World:
 
     def get_stats(self, critter_type):
         """
-        Returns a tuple of stats for the given critter type, e.g. "Bear".
+        Returns a tuple of stats for the given critter type, e.g. "Cow".
         """
         return self.num_alive[critter_type], self.num_wins[critter_type], \
             self.num_eaten[critter_type]
@@ -480,13 +472,6 @@ def create_window():
     stats.grid(row=0, column=1, rowspan=2, padx=15, sticky=N)
 
     frame_text_color = "blue"
-    l = LabelFrame(stats, fg=frame_text_color, text="Bear", width=100)
-    l.pack(fill='x', expand=True)
-    global bear_stats_string
-    bear_stats_string = StringVar()
-    bear_stats_string.set("Alive: \nKills: \nEaten: \nPoints: ")
-    bear_stats = Label(l, textvariable=bear_stats_string, justify=LEFT)
-    bear_stats.pack(fill='x', expand=True)
 
     l2 = LabelFrame(stats, fg=frame_text_color, text="Sloth", width=100)
     l2.pack(fill='x', expand=True)
@@ -679,12 +664,6 @@ def do_turn():
         world.grow_food()
 
     # update stats in right side of window
-    global bear_stats_string
-    alive, kills, eaten = world.get_stats("Bear")
-    total_points = alive + kills + eaten
-    bear_stats_string.set("Alive: %d\nKills: %d\nEaten: %d\nPoints: %d" %
-                          (alive, kills, eaten, total_points))
-
     global sloth_stats_string
     alive, kills, eaten = world.get_stats("Sloth")
     total_points = alive + kills + eaten
@@ -706,10 +685,7 @@ def do_turn():
     world.draw()
 
 def spawn_critter(critter_name, location, world):
-    if critter_name == "Bear":
-        is_a_grizzly = random.choice([True, False])
-        critter = Bear(location, is_a_grizzly)
-    elif critter_name == "Cow":
+    if critter_name == "Cow":
         critter = Cow(location)
     elif critter_name == "Sloth":
         speed = random.randrange(3, 5)
@@ -722,13 +698,11 @@ def spawn_critter(critter_name, location, world):
 
 def initialize_critters(num_each_type):
     """ Create and randomly place critters. """
-    for i in range(num_each_type * 4):
+    for i in range(num_each_type * 3):
         critter_loc = world.get_open_spot()
-        if i%4 == 0:
-            critter_name = "Bear"
-        elif i%4 == 1:
+        if i%3 == 0:
             critter_name = "Sloth"
-        elif i%4 == 2:
+        elif i%3 == 1:
             critter_name = "Cow"
         else:
             critter_name = "ScaredCat"
