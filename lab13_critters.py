@@ -80,9 +80,7 @@ class ScaredCat(Critter):
 
 class Cow(Critter):
     """
-    A cow in our critters world. It will move in an L pattern, randomly pick
-    whether to POUNCE or SCRATCH as an attack, and randomly decide whether to
-    eat or not. It is displayed as a brown 'M'.
+    A cow in our critters world.
 
     DO NOT MODIFY THIS CLASS IN ANY WAY!
     """
