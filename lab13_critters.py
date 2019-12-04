@@ -59,7 +59,7 @@ class Critter:
 
 
 """
-To Do: Complete the Sloth, Cow, and ScaredCat classes below.
+To Do: Complete the ScaredCat and Sloth classes below.
 
 Note: remove the "pass" statement after you start implementing the constructor.
 """
@@ -71,13 +71,6 @@ class Sloth(Critter):
         pass
 
 
-class Cow(Critter):
-    """ Replace this with a docstring for your class. """
-
-    def __init__(self, location):
-        pass
-
-
 class ScaredCat(Critter):
     """ Replace this with a docstring for your class. """
 
@@ -85,7 +78,37 @@ class ScaredCat(Critter):
         pass
 
 
+class Cow(Critter):
+    """
+    A cow in our critters world. It will move in an L pattern, randomly pick
+    whether to POUNCE or SCRATCH as an attack, and randomly decide whether to
+    eat or not. It is displayed as a brown 'M'.
 
+    DO NOT MODIFY THIS CLASS IN ANY WAY!
+    """
+
+    def __init__(self, location):
+        super().__init__(location)
+        self.dirs = [Direction.NORTH, Direction.SOUTH, Direction.EAST,
+                Direction.WEST]
+        self.move_number = 0
+
+    def __str__(self):
+        return "M"
+
+    def get_move(self, neighbors):
+        i = self.move_number % 4
+        self.move_number = self.move_number + 1
+        return self.dirs[i]
+
+    def fight(self, opponent):
+        return random.choice([Attack.POUNCE, Attack.SCRATCH])
+
+    def get_color(self):
+        return "brown"
+
+    def eat(self):
+        return random.choice([True, False])
 
 
 
