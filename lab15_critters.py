@@ -1,5 +1,5 @@
 """
-Module: lab13_critters
+Module: lab15_critters
 
 A modified version of Critters with different types of critters in the world.
 
