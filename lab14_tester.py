@@ -48,7 +48,7 @@ def test_sloth_init():
     assert b.x == 5 and b.y == 3, \
         "Sloth's x and y not set correctly. Did you call the super constructor?"
 
-    print("\nTest of Sloth.__init__ passed")
+    print("\tTest of Sloth.__init__ PASSED")
 
 def test_sloth_str():
     print("\nTesting Sloth's __str__ method")
@@ -59,7 +59,7 @@ def test_sloth_str():
         assert str(b) == "S", \
             "Sloth should always return 'S' from __str__"
 
-    print("\nTest of Sloth.__str__ passed")
+    print("\tTest of Sloth.__str__ PASSED")
 
 def test_sloth_get_color():
     print("\nTesting Sloth's get_color method")
@@ -68,7 +68,7 @@ def test_sloth_get_color():
     sloth_color = b.get_color()
     assert sloth_color != "brown" and sloth_color != "black", "Sloth should be any color except black or brown"
 
-    print("\nTest of Sloth.get_color passed")
+    print("\tTest of Sloth.get_color PASSED")
 
 def test_sloth_eat():
     print("\nTesting Sloth's eat method")
@@ -78,7 +78,7 @@ def test_sloth_eat():
     for _ in range(10):
         assert b.eat() == True, "Sloth should always eat"
 
-    print("\nTest of Sloth.eat passed")
+    print("\tTest of Sloth.eat PASSED")
 
 def test_sloth_fight():
     print("\nTesting Sloth's fight method")
@@ -89,7 +89,7 @@ def test_sloth_fight():
         for opponent in ["C", "?"]:
             assert b.fight(opponent) == Attack.SCRATCH, "Sloth should always SCRATCH"
 
-    print("\nTest of Sloth.fight passed")
+    print("\tTest of Sloth.fight PASSED")
 
 def test_sloth_get_move():
     print("\nTesting Sloth's get_move method")
@@ -120,7 +120,7 @@ def test_sloth_get_move():
     assert actual_moves == expected_moves, \
         "Expected first 10 moves: %s\nActual first 10 moves: %s" % (expected_moves, actual_moves)
 
-    print("\nTest of Sloth.get_move passed")
+    print("\tTest of Sloth.get_move PASSED")
 
 
 def test_cat_init():
@@ -133,7 +133,7 @@ def test_cat_init():
     assert l.x == 5 and l.y == 3, \
         "x and y not set correctly. Did you call the parent's constructor?"
 
-    print("\nTest of ScaredCat.__init__ passed")
+    print("\tTest of ScaredCat.__init__ PASSED")
 
 def test_cat_str():
     print("\nTesting ScaredCat's __str__ method")
@@ -144,7 +144,7 @@ def test_cat_str():
         assert str(l) == "!", \
             "ScaredCat should always return '!' from __str__"
 
-    print("\nTest of ScaredCat.__str__ passed")
+    print("\tTest of ScaredCat.__str__ PASSED")
 
 def test_cat_get_color():
     print("\nTesting ScaredCat's get_color method")
@@ -158,7 +158,7 @@ def test_cat_get_color():
         assert l.get_color() == expected_color, \
             "ScaredCat always return 'red' from get_color"
 
-    print("\nTest of ScaredCat.get_color passed")
+    print("\tTest of ScaredCat.get_color PASSED")
 
 def test_cat_eat():
     print("\nTesting ScaredCat's eat method")
@@ -168,7 +168,7 @@ def test_cat_eat():
     for _ in range(10):
         assert l.eat() == False, "ScaredCat should never eat (i.e. always return False)"
 
-    print("\nTest of ScaredCat.eat passed")
+    print("\tTest of ScaredCat.eat PASSED")
 
 def test_cat_fight():
     print("\nTesting ScaredCat's fight method")
@@ -179,7 +179,7 @@ def test_cat_fight():
     for _ in range(10):
         assert l.fight("M") == Attack.FORFEIT, "ScaredCat should always FORFEIT."
 
-    print("\nTest of ScaredCat.fight passed")
+    print("\tTest of ScaredCat.fight PASSED")
 
 def get_neighbors(open_dir):
     # Returns neighbors dictionary, with all neighbors set to "M" except the
@@ -226,7 +226,7 @@ def test_cat_get_move():
 
     actual_move = l.get_move(neighbors)
     assert actual_move == Direction.CENTER, f"Expected to not move (CENTER), but went {actual_move}"
-    print("\nTest of ScaredCat.get_move passed")
+    print("\tTest of ScaredCat.get_move PASSED")
 
 
 
