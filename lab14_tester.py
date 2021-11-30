@@ -31,11 +31,11 @@ def run_tests():
         test_cat_fight()
         test_cat_get_move()
 
-    except AssertionError as e:
-        print("\nTest FAILED :(\n")
-        raise e
+        print("Congratulations: All tests PASSED!")
 
-    print("Congratulations: All tests PASSED!")
+    except AssertionError as e:
+        print("\tTest FAILED:", e)
+
 
 
 def test_sloth_init():
