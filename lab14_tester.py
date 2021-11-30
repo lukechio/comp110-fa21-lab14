@@ -1,7 +1,7 @@
 """
-Module: psa9_tester
+Module: lab14_tester
 
-Test cases for critters project.
+Test cases for Lab 14 (Crittres)
 
 DO NOT MODIFY THIS FILE IN ANY WAY!
 
