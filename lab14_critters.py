@@ -57,25 +57,82 @@ class Critter:
         self.world_height = height
 
 
-
 """
 To Do: Complete the Sloth and ScaredCat classes below.
 
 Note: remove the "pass" statement after you start implementing the constructor.
 """
 
+
 class Sloth(Critter):
-    """ Replace this with a docstring for your class. """
+    """ 
+    A new critter (sloth) for our class critter box
+
+    Parameters: Critter
+
+    Returns a fully fucntional critter that will interact with other comp-110 critters
+
+    """
 
     def __init__(self, location, speed):
-        pass
+        super().__init__(location)
+        self.dirs = [Direction.EAST, Direction.CENTER, Direction.EAST,
+                     Direction.CENTER]
+        self.move_number = 0
+        self.speed = speed
+
+    def __str__(self):
+        return "S"
+
+    def get_move(self, neighbors):
+        i = self.move_number % self.speed
+        self.move_number = self.move_number + 1
+        if i == 0:
+            return Direction.EAST
+        else:
+            return Direction.CENTER
+
+    def fight(self, opponent):
+        return ([Attack.SCRATCH])
+
+    def get_color(self):
+        return "red"
+
+    def eat(self):
+        return True
 
 
 class ScaredCat(Critter):
-    """ Replace this with a docstring for your class. """
+    """ 
+    A new Scared cat critter for our critter box to go along with the cows and sloths
+
+    Parameters: Critter
+
+    Returns a new cat and a fully fucntional cat that lives in with the other critters
+     """
 
     def __init__(self, location):
-        pass
+        super().__init__(location)
+        self.dirs = [Direction.NORTH, Direction.SOUTH, Direction.EAST,
+                     Direction.WEST]
+        self.move_number = 0
+
+    def __str__(self):
+        return "!"
+
+    def get_move(self, neighbors):
+        i = self.move_number % 4
+        self.move_number = self.move_number + 1
+        return self.dirs[i]
+
+    def fight(self, opponent):
+        return Attack.FORFEIT
+
+    def get_color(self):
+        return "red"
+
+    def eat(self):
+        return False
 
 
 class Cow(Critter):
@@ -88,7 +145,7 @@ class Cow(Critter):
     def __init__(self, location):
         super().__init__(location)
         self.dirs = [Direction.NORTH, Direction.SOUTH, Direction.EAST,
-                Direction.WEST]
+                     Direction.WEST]
         self.move_number = 0
 
     def __str__(self):
@@ -109,22 +166,7 @@ class Cow(Critter):
         return random.choice([True, False])
 
 
-
-
-
-
-
-
-
 """ DO NOT MODIFY ANYTHING PAST THIS POINT!!!! """
-
-
-
-
-
-
-
-
 
 
 class Direction(Enum):
@@ -135,6 +177,7 @@ class Direction(Enum):
     WEST = 4
     CENTER = 5
 
+
 class Attack(Enum):
     """ Enumeration for possible Critter attacks. """
     ROAR = 1
@@ -142,10 +185,11 @@ class Attack(Enum):
     SCRATCH = 3
     FORFEIT = 4
 
-FOOD_COMA_PERIOD = 2 # how many times critter can eat before falling asleep
+
+FOOD_COMA_PERIOD = 2  # how many times critter can eat before falling asleep
 FOOD_COMA_SLEEP_TIME = 20  # how long a critter sleeps after eating too much
-GESTATION_PERIOD = 40 # how long the mating period is for critters
-FOOD_RESPAWN_PERIOD = 50 # how often to spawn new food
+GESTATION_PERIOD = 40  # how long the mating period is for critters
+FOOD_RESPAWN_PERIOD = 50  # how often to spawn new food
 
 after_id = None
 root = None
@@ -164,6 +208,7 @@ reset_button = None
 sloth_stats_string = None
 cow_stats_string = None
 torero_stats_string = None
+
 
 class World:
     """
@@ -191,11 +236,10 @@ class World:
                 if random.random() < food_probability:
                     self.food_grid[y][x] = True
 
-
-        self.sleep_time = {} # map critter to how many more turns to sleep
-        self.gestate_time = {} # map critter to how many more turns of mating
-        self.pregnant_critters = [] # list of pregnant critters
-        self.amount_eaten = {} # map critter to how much they have eaten
+        self.sleep_time = {}  # map critter to how many more turns to sleep
+        self.gestate_time = {}  # map critter to how many more turns of mating
+        self.pregnant_critters = []  # list of pregnant critters
+        self.amount_eaten = {}  # map critter to how much they have eaten
 
         # map from critter type to amount that are alive
         self.num_alive = {"Cow": 0, "Sloth": 0, "ScaredCat": 0}
@@ -217,7 +261,6 @@ class World:
                              highlightthickness=0)
         self.canvas.pack()
 
-
     def clear(self):
         """
         Clears the world, resetting everything back to an initial state.
@@ -232,10 +275,10 @@ class World:
                 if random.random() < self.food_probability:
                     self.food_grid[y][x] = True
 
-        self.sleep_time = {} # map critter to how many more turns to sleep
-        self.gestate_time = {} # map critter to how many more turns of mating
-        self.pregnant_critters = [] # list of pregnant critters
-        self.amount_eaten = {} # map critter to how much they have eaten
+        self.sleep_time = {}  # map critter to how many more turns to sleep
+        self.gestate_time = {}  # map critter to how many more turns of mating
+        self.pregnant_critters = []  # list of pregnant critters
+        self.amount_eaten = {}  # map critter to how much they have eaten
 
         # start with no critters and every spot in the world is open
         self.critters = []
@@ -534,6 +577,7 @@ def sim_loop():
     tick_button.config(state=DISABLED)
     stop_button.config(state=NORMAL)
 
+
 def stop_sim_loop():
     """ Stops the simulation from doing more turns. """
     global after_id
@@ -545,6 +589,7 @@ def stop_sim_loop():
         start_button.config(state=NORMAL)
         tick_button.config(state=NORMAL)
         stop_button.config(state=DISABLED)
+
 
 def reset_simulation():
     """
@@ -559,6 +604,7 @@ def reset_simulation():
     initialize_critters(num_critters)
     turn_number = 0
     world.draw()
+
 
 def battle(critter1, critter2):
     """
@@ -576,12 +622,13 @@ def battle(critter1, critter2):
         else:
             return critter2, critter1
     elif c2_attack == Attack.FORFEIT \
-    or c1_attack == Attack.ROAR and c2_attack == Attack.SCRATCH \
-    or c1_attack == Attack.SCRATCH and c2_attack == Attack.POUNCE \
-    or c1_attack == Attack.POUNCE and c2_attack == Attack.ROAR:
+            or c1_attack == Attack.ROAR and c2_attack == Attack.SCRATCH \
+            or c1_attack == Attack.SCRATCH and c2_attack == Attack.POUNCE \
+            or c1_attack == Attack.POUNCE and c2_attack == Attack.ROAR:
         return critter1, critter2
     else:
         return critter2, critter1
+
 
 def do_turn():
     """ Performs a single turn of the simulation. """
@@ -633,7 +680,6 @@ def do_turn():
         if west_neighbor is not None:
             west_neighbor = str(west_neighbor)
         neighbors[Direction.WEST] = west_neighbor
-
 
         move = critter.get_move(neighbors)
 
@@ -689,13 +735,13 @@ def do_turn():
     alive, kills, eaten = world.get_stats("Sloth")
     total_points = alive + kills + eaten
     sloth_stats_string.set("Alive: %d\nKills: %d\nEaten: %d\nPoints: %d" %
-                             (alive, kills, eaten, total_points))
+                           (alive, kills, eaten, total_points))
 
     global cow_stats_string
     alive, kills, eaten = world.get_stats("Cow")
     total_points = alive + kills + eaten
     cow_stats_string.set("Alive: %d\nKills: %d\nEaten: %d\nPoints: %d" %
-                          (alive, kills, eaten, total_points))
+                         (alive, kills, eaten, total_points))
 
     global torero_stats_string
     alive, kills, eaten = world.get_stats("ScaredCat")
@@ -704,6 +750,7 @@ def do_turn():
                             (alive, kills, eaten, total_points))
 
     world.draw()
+
 
 def spawn_critter(critter_name, location, world):
     if critter_name == "Cow":
@@ -717,13 +764,14 @@ def spawn_critter(critter_name, location, world):
     critter.set_world_dimensions(world.width, world.height)
     return critter
 
+
 def initialize_critters(num_each_type):
     """ Create and randomly place critters. """
     for i in range(num_each_type * 3):
         critter_loc = world.get_open_spot()
-        if i%3 == 0:
+        if i % 3 == 0:
             critter_name = "Sloth"
-        elif i%3 == 1:
+        elif i % 3 == 1:
             critter_name = "Cow"
         else:
             critter_name = "ScaredCat"
@@ -747,6 +795,7 @@ def simulate(world_width, world_height, num_each_type):
 
     world.draw()
     root.mainloop()
+
 
 if __name__ == "__main__":
     simulate(60, 50, 25)
